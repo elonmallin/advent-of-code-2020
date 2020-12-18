@@ -28,14 +28,6 @@ class part_1:
 
 class part_2:
     def solve(lines):
-        """
-        Sort list
-        Check if 1 jolt exists, recurse down
-        Check if 2 jolt exists, recurse down
-        Check if 3 jolt exists, recurse down
-        += result of the 3 tests
-        Memoize above to not count again
-        """
         lines = sorted(lines)
         lines.insert(0, 0)
         cache = {}
@@ -46,7 +38,7 @@ class part_2:
 
 
     def solve_recurse(lines, idx, cache):
-        if idx >= len(lines)-1:
+        if idx >= len(lines) - 1:
             return 1
 
         num_ways = 0
@@ -55,8 +47,8 @@ class part_2:
             if idx + i >= len(lines):
                 break
 
-            sub_key = lines[idx + i] - lines[idx]
-            if sub_key in [1,2,3]:
+            diff = lines[idx + i] - lines[idx]
+            if diff <= 3:
                 if idx + i in cache:
                     num_ways += cache[idx + i]
                 else:
